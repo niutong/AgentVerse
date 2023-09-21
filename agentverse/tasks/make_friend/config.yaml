@@ -55,7 +55,7 @@ prompts:
     你作为 ${agent_name}，这轮对话想说些什么？请根据你们的历史聊天记录，和你的性格、你的相亲要求，来给出想说的话。一定记住，要严格按照上面提到的要求来进行，不要增加其他字段或内容。
 
 
-name: prisoner_dilemma
+name: make_friend
 
 environment:
   env_type: basic
