@@ -68,7 +68,7 @@ environment:
     selector:
       type: make_friend
     updater:
-      type: make_friend
+      type: basic
     describer:
       type: basic
 
