@@ -1,4 +1,4 @@
-from server.model_workers.base import ApiModelWorker
+from agentverse.model_workers.base import ApiModelWorker
 from fastchat import conversation as conv
 import sys
 import json
@@ -62,7 +62,7 @@ class ChatGLMWorker(ApiModelWorker):
 
 if __name__ == "__main__":
     import uvicorn
-    from server.utils import MakeFastAPIOffline
+    from agentverse.utils import MakeFastAPIOffline
     from fastchat.serve.model_worker import app
 
     worker = ChatGLMWorker(

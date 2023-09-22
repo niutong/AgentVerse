@@ -2,7 +2,7 @@ import asyncio
 from typing import Awaitable, List, Tuple, Dict, Union
 from pydantic import BaseModel, Field
 from langchain.prompts.chat import ChatMessagePromptTemplate
-from configs import logger, log_verbose
+from agentverse.configs import logger, log_verbose
 
 
 async def wrap_done(fn: Awaitable, event: asyncio.Event):

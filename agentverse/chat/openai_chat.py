@@ -1,7 +1,7 @@
 from fastapi.responses import StreamingResponse
 from typing import List
 import openai
-from configs.model_config import llm_model_dict, LLM_MODEL, logger, log_verbose
+from agentverse.configs.model_config import llm_model_dict, LLM_MODEL, logger, log_verbose
 from pydantic import BaseModel
 
 

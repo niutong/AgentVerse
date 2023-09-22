@@ -1,7 +1,7 @@
 from fastapi import Body
 from fastapi.responses import StreamingResponse
-from configs.model_config import llm_model_dict, LLM_MODEL, TEMPERATURE
-from server.chat.utils import wrap_done
+from agentverse.configs.model_config import llm_model_dict, LLM_MODEL, TEMPERATURE
+from agentverse.chat.utils import wrap_done
 from langchain.chat_models import ChatOpenAI
 from langchain import LLMChain
 from langchain.callbacks import AsyncIteratorCallbackHandler
@@ -9,7 +9,7 @@ from typing import AsyncIterable
 import asyncio
 from langchain.prompts.chat import ChatPromptTemplate
 from typing import List
-from server.chat.utils import History
+from agentverse.chat.utils import History
 
 
 async def chat(query: str = Body(..., description="用户输入", examples=["恼羞成怒"]),

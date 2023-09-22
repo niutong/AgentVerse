@@ -1,11 +1,11 @@
-from server.model_workers.base import ApiModelWorker
-from configs.model_config import TEMPERATURE
+from agentverse.model_workers.base import ApiModelWorker
+from agentverse.configs.model_config import TEMPERATURE
 from fastchat import conversation as conv
 import sys
 import json
 import httpx
 from cachetools import cached, TTLCache
-from server.utils import get_model_worker_config
+from agentverse.utils import get_model_worker_config
 from typing import List, Literal, Dict
 
 
@@ -160,7 +160,7 @@ class QianFanWorker(ApiModelWorker):
 
 if __name__ == "__main__":
     import uvicorn
-    from server.utils import MakeFastAPIOffline
+    from agentverse.utils import MakeFastAPIOffline
     from fastchat.serve.model_worker import app
 
     worker = QianFanWorker(

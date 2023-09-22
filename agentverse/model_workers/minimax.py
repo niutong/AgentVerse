@@ -1,4 +1,4 @@
-from server.model_workers.base import ApiModelWorker
+from agentverse.model_workers.base import ApiModelWorker
 from fastchat import conversation as conv
 import sys
 import json

@@ -1,12 +1,12 @@
 from langchain.utilities import BingSearchAPIWrapper, DuckDuckGoSearchAPIWrapper
-from configs.model_config import BING_SEARCH_URL, BING_SUBSCRIPTION_KEY
+from agentverse.configs.model_config import BING_SEARCH_URL, BING_SUBSCRIPTION_KEY
 from fastapi import Body
 from fastapi.responses import StreamingResponse
 from fastapi.concurrency import run_in_threadpool
-from configs.model_config import (llm_model_dict, LLM_MODEL, SEARCH_ENGINE_TOP_K,
+from agentverse.configs.model_config import (llm_model_dict, LLM_MODEL, SEARCH_ENGINE_TOP_K,
                                   PROMPT_TEMPLATE, TEMPERATURE)
-from server.chat.utils import wrap_done
-from server.utils import BaseResponse
+from agentverse.chat.utils import wrap_done
+from agentverse.utils import BaseResponse
 from langchain.chat_models import ChatOpenAI
 from langchain import LLMChain
 from langchain.callbacks import AsyncIteratorCallbackHandler
@@ -14,7 +14,7 @@ from typing import AsyncIterable
 import asyncio
 from langchain.prompts.chat import ChatPromptTemplate
 from typing import List, Optional
-from server.chat.utils import History
+from agentverse.chat.utils import History
 from langchain.docstore.document import Document
 import json
 
