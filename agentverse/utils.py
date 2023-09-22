@@ -6,8 +6,8 @@ from typing import List
 from fastapi import FastAPI
 from pathlib import Path
 import asyncio
-from configs.model_config import LLM_MODEL, llm_model_dict, LLM_DEVICE, EMBEDDING_DEVICE, logger, log_verbose
-from configs.server_config import FSCHAT_MODEL_WORKERS
+from agentverse.configs.model_config import LLM_MODEL, llm_model_dict, LLM_DEVICE, EMBEDDING_DEVICE, logger, log_verbose
+from agentverse.configs.server_config import FSCHAT_MODEL_WORKERS
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Literal, Optional, Callable, Generator, Dict, Any
