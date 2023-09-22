@@ -98,7 +98,7 @@ class CachePool:
             return cache
 
     def load_kb_embeddings(self, kb_name: str=None, embed_device: str = embedding_device()) -> Embeddings:
-        from server.db.repository.knowledge_base_repository import get_kb_detail
+        from agentverse.db.repository.knowledge_base_repository import get_kb_detail
 
         kb_detail = get_kb_detail(kb_name=kb_name)
         print(kb_detail)
