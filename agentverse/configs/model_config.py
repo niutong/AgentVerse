@@ -166,12 +166,12 @@ OVERLAP_SIZE = 0
 
 
 # 日志存储路径
-LOG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
+LOG_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "logs")
 if not os.path.exists(LOG_PATH):
     os.mkdir(LOG_PATH)
 
 # 知识库默认存储路径
-KB_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "knowledge_base")
+KB_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "knowledge_base")
 if not os.path.exists(KB_ROOT_PATH):
     os.mkdir(KB_ROOT_PATH)
 # 数据库默认存储路径。
