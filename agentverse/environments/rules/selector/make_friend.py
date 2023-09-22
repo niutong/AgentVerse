@@ -18,31 +18,35 @@ class MakeFriendSelector(BaseSelector):
     ) -> List[Message]:
         selected = []
         for message in messages:
-            selected.append(message)
-        #
-        #     if message.sender.startswith("young"):
-        #         if message.content.startswith("[Speak]"):
-        #             selected.append(message)
-        #         elif message.content != "" or len(message.tool_response) > 0:
-        #             selected.append(message)
-        #     elif message.sender.startswith("Professor"):
-        #         # If the professor launch a group discussion, then we
-        #         # brutely discard the student's message in this turn
-        #         if message.content.startswith("[Topic]"):
-        #             return [message]
-        #         selected.append(message)
-        #
-        # # If some student speak while the professor is speaking, then
-        # # we brutely discard the student's message in this turn
-        # if (
-        #     len(selected) > 1
-        #     and selected[0].sender.startswith("Professor")
-        #     and selected[0].content != ""
-        # ):
-        #     filtered_selected = []
-        #     filtered_selected.append(selected[0])
-        #     for message in selected[1:]:
-        #         if message.content.startswith("[RaiseHand]"):
-        #             filtered_selected.append(message)
-        #     selected = filtered_selected
+            # selected.append(message)
+
+            if message.sender.startswith("young"):
+                if message.content.startswith("[Speak]"):
+                    selected.append(message)
+                elif message.content.startswith("[Listen]"):
+                    continue
+                elif message.content != "" or len(message.tool_response) > 0:
+                    selected.append(message)
+            elif message.sender.startswith("matchmaker"):
+                # If the professor launch a group discussion, then we
+                # brutely discard the student's message in this turn
+                if message.content.startswith("[Topic]"):
+                    return [message]
+                if message.content.startswith("[Listen]"):
+                    continue
+                selected.append(message)
+
+        # If some student speak while the professor is speaking, then
+        # we brutely discard the student's message in this turn
+        if (
+            len(selected) > 1
+            and selected[0].sender.startswith("Professor")
+            and selected[0].content != ""
+        ):
+            filtered_selected = []
+            filtered_selected.append(selected[0])
+            for message in selected[1:]:
+                if message.content.startswith("[RaiseHand]"):
+                    filtered_selected.append(message)
+            selected = filtered_selected
         return selected

@@ -11,3 +11,4 @@ from .oneself import OneselfVisibility
 from .prisoner import PrisonerVisibility
 from .sde_team import SdeTeamVisibility
 from .pokemon import PokemonVisibility
+from .make_friend import MakeFriendVisibility

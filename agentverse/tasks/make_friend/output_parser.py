@@ -27,6 +27,6 @@ class MakeFriendParser(OutputParser):
         if action in ["Speak", "Summary", "Topic"]:
             return AgentFinish({"output": f"[{action}] {action_input}"}, text)
         elif action == "Listen":
-            return AgentFinish({"output": "Listening..."}, text)
+            return AgentFinish({"output": ""}, text)
         else:
             return AgentAction(action, action_input, text)

@@ -35,7 +35,7 @@ class MakeFriendVisibility(BaseVisibility):
         # We turn on grouping mode when the professor launches a group discussion
         if len(environment.last_messages) == 1 and environment.last_messages[
             0
-        ].content.startswith("[Topic]"):
+        ].content.startswith("[Speak]"):
             environment.rule_params["is_grouped"] = True
             # We randomly group the students
             environment.rule_params["groups"] = self.group_students(environment)

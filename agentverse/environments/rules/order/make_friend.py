@@ -29,7 +29,7 @@ class MakeFriendOrder(BaseOrder):
             return [0]
         if environment.rule_params.get("is_grouped_ended", False):
             return [0]
-        return self.get_next_agent_idx_ungrouped(environment)
+        return self.get_next_agent_idx_grouped(environment)
 
     def get_next_agent_idx_grouped(self, environment: BaseEnvironment) -> List[int]:
         # Get the grouping information

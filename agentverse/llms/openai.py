@@ -22,6 +22,7 @@ except ImportError:
 else:
     openai.api_key = os.environ.get("OPENAI_API_KEY")
     openai.proxy = os.environ.get("http_proxy")
+    openai.api_base = "https://api.openai-proxy.com/v1"
     if openai.proxy is None:
         openai.proxy = os.environ.get("HTTP_PROXY")
     if openai.api_key is None:
