@@ -1,0 +1,99 @@
+prompts:
+  novelist_prompt: &novelist_prompt |-
+    
+    你是一位经验丰富的小说作家，擅长根据已知的故事背景、故事开头和结尾，设计故事的人物、情节发展。现在你正在参与一个小说的创作活动，
+    请基于以下故事背景、故事开头和结尾的预先设定，给出故事大纲，可以分成5个章节依次给出。
+    ${role_description}
+  
+    # 回复规则及格式说明
+    - 你发言时，必须使用以下格式，而且只能包含Action和Action Input两个字段内容，且只输出一遍，其他任何内容不要添加。
+    Action: Speak
+    Action Input: (你要说的内容)
+    
+    注意：
+    - 你现在正和两个资深的小说评论家进行交流，他们会对你提出的故事大纲给出一些评价和修改意见，你需要根据他的要求重新修改故事大纲并重新给出。
+  
+    这里是历史聊天记录：
+    ${chat_history}
+    
+    你作为 ${agent_name}，这轮对话想说些什么？
+
+  critic_prompt: &critic_prompt |-
+    
+    你是一个资深的小说评论家，现在正在参与一个故事的创作交流活动，在和一位作家和另外一位小说评论家对话。
+    你希望小说符合以下标准：
+    ${role_description}
+    
+    希望作家给出的故事大纲能够符合你的品味，你要对作家给出的小说大纲内容，给出你的评价观点并提出你的修改意见。
+
+    - 你必须按照下面的格式来准备您的回复，在任何情况下，只使用两个字段"Action" 和"Action Input"，格式如下：
+    Action: Speak
+    Action Input: (你要说的内容)
+    这里是会话历史记录：
+    ${chat_history}
+
+    你作为 ${agent_name}，这轮对话想说些什么？请根据你们的历史聊天记录，和你的性格、你的相亲要求，来给出想说的话。
+
+
+name: story_generator
+
+environment:
+  env_type: basic
+  max_turns: 30
+  rule:
+    order:
+      type: story_generator
+    visibility:
+      type: story_generator
+      grouping: sequential
+      student_per_group: 2
+      num_discussion_turn: 3
+    selector:
+      type: story_generator
+    updater:
+      type: basic
+    describer:
+      type: basic
+
+agents:
+  - agent_type: conversation
+    name: novelist
+    interrogating_form:
+    role_description: 故事背景：这个故事发生在唐朝。开头：今天阳光明媚。结尾：我再次拯救了这个世界。
+    memory:
+      memory_type: chat_history
+    prompt_template: *novelist_prompt
+    llm:
+      model: gpt-3.5-turbo
+      llm_type: gpt-3.5-turbo
+      temperature: 0.8
+      max_tokens: 1000
+  - agent_type: conversation
+    name: novel_critic_user_a
+    personality:
+    relationship_with_another:
+    role_description: 小说情节幽默、风趣，不枯燥乏味，能够有创新，富有想像力。
+    memory:
+      memory_type: chat_history
+    prompt_template: *critic_prompt
+    llm:
+      model: gpt-3.5-turbo
+      llm_type: gpt-3.5-turbo
+      temperature: 0.8
+      max_tokens: 1000
+  - agent_type: conversation
+    name: novel_critic_user_b
+    personality:
+    relationship_with_another:
+    role_description: 小说人物要个性鲜明，内容抒情有爱，可以引起读者共鸣。
+    memory:
+      memory_type: chat_history
+    prompt_template: *critic_prompt
+    llm:
+      model: gpt-3.5-turbo
+      llm_type: gpt-3.5-turbo
+      temperature: 0.8
+      max_tokens: 1000
+
+
+tools:

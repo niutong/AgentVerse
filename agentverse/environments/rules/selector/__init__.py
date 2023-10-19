@@ -9,3 +9,4 @@ from .sde_team import SdeTeamSelector
 from .sde_team_given_tests import SdeTeamGivenTestsSelector
 from .pokemon import PokemonSelector
 from .make_friend import MakeFriendSelector
+from .story_generator import StoryGeneratorSelector
