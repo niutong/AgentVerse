@@ -21,45 +21,24 @@ class StoryGeneratorOrder(BaseOrder):
     4. In the group discussion, the students in the group can speak in turn
     """
 
+    last_critic_index: int = 1
+    switch_func: dict = {1: 2, 2: 1}
+
     def get_next_agent_idx(self, environment: BaseEnvironment) -> List[int]:
-        # `is_grouped_ended`: whether the group discussion just ended
-
         if len(environment.last_messages) == 0:
-            # If the game just begins or , we let only the police speak
             return [0]
-        if environment.rule_params.get("is_grouped_ended", False):
+        elif len(environment.last_messages) == 1:
+            message = environment.last_messages[0]
+            sender = message.sender
+            content = message.content
+            if sender.startswith("novelist"):
+                next_prisoner = self.last_critic_index
+                self.last_critic_index = self.switch_func[self.last_critic_index]
+                return [next_prisoner]
+            elif sender.startswith("novel_critic_user"):
+                return [0]
+        else:
+            # If len(last_messages) > 1, then
+            # 1. there must be at least one student raises hand or speaks.
+            # 2. the group discussion is just over.
             return [0]
-        return self.get_next_agent_idx_grouped(environment)
-
-    def get_next_agent_idx_grouped(self, environment: BaseEnvironment) -> List[int]:
-        # Get the grouping information
-        # groups: A list of list of agent ids, the i-th list contains
-        #   the agent ids in the i-th group
-        # group_speaker_mapping: A mapping from group id to the id of
-        #   the speaker in the group
-        # `groups` should be set in the corresponding `visibility`,
-        # and `group_speaker_mapping` should be maintained here.
-        if "groups" not in environment.rule_params:
-            logging.warning(
-                "The environment is grouped, but the grouping information is not provided."
-            )
-        groups = environment.rule_params.get(
-            "groups", [list(range(len(environment.agents)))]
-        )
-        group_speaker_mapping = environment.rule_params.get(
-            "group_speaker_mapping", {i: 0 for i in range(len(groups))}
-        )
-
-        # For grouped environment, we let the students speak in turn within each group
-        next_agent_idx = []
-        for group_id in range(len(groups)):
-            speaker_index = group_speaker_mapping[group_id]
-            speaker = groups[group_id][speaker_index]
-            next_agent_idx.append(speaker)
-
-        # Maintain the `group_speaker_mapping`
-        for k, v in group_speaker_mapping.items():
-            group_speaker_mapping[k] = (v + 1) % len(groups[k])
-        environment.rule_params["group_speaker_mapping"] = group_speaker_mapping
-
-        return next_agent_idx

@@ -19,3 +19,4 @@ from .sde_team.sde_team_2players.output_parser import SdeTeamGivenTestsParser
 from .alice_home.output_parser import AliceHomeParser
 
 from .make_friend.output_parser import MakeFriendParser
+from .story_generator.output_parser import StoryGeneratorParser

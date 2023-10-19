@@ -28,7 +28,7 @@ class StoryGeneratorVisibility(BaseVisibility):
 
     grouping: Union[str, List[List[int]]]
     student_per_group: int = 2
-    num_discussion_turn: int = 3
+    num_discussion_turn: int = 1
     current_turn: int = 0
 
     def update_visible_agents(self, environment: BaseEnvironment):

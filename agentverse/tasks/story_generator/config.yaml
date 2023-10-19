@@ -39,7 +39,7 @@ name: story_generator
 
 environment:
   env_type: basic
-  max_turns: 30
+  max_turns: 10
   rule:
     order:
       type: story_generator
@@ -47,7 +47,7 @@ environment:
       type: story_generator
       grouping: sequential
       student_per_group: 2
-      num_discussion_turn: 3
+      num_discussion_turn: 1
     selector:
       type: story_generator
     updater:
@@ -67,7 +67,7 @@ agents:
       model: gpt-3.5-turbo
       llm_type: gpt-3.5-turbo
       temperature: 0.8
-      max_tokens: 1000
+      max_tokens: 100
   - agent_type: conversation
     name: novel_critic_user_a
     personality:
@@ -80,7 +80,7 @@ agents:
       model: gpt-3.5-turbo
       llm_type: gpt-3.5-turbo
       temperature: 0.8
-      max_tokens: 1000
+      max_tokens: 100
   - agent_type: conversation
     name: novel_critic_user_b
     personality:
@@ -93,7 +93,7 @@ agents:
       model: gpt-3.5-turbo
       llm_type: gpt-3.5-turbo
       temperature: 0.8
-      max_tokens: 1000
+      max_tokens: 100
 
 
 tools:
